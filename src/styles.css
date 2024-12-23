@@ -1,77 +1,104 @@
-body {
+/* 1. Use a more-intuitive box-sizing model */
+*, *::before, *::after {
+    box-sizing: border-box;
+    }
+    /* 2. Remove default margin */
+    * {
     margin: 0;
-    padding: 0;
-    width: 100%;
+    }
+    body {
+    /* 3. Add accessible line-height */
+    line-height: 1.5;
+    /* 4. Improve text rendering */
+    -webkit-font-smoothing: antialiased;
+    }
+    /* 5. Improve media defaults */
+    img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+    }
+    /* 6. Inherit fonts for form controls */
+    input, button, textarea, select {
+    font: inherit;
+    }
+    /* 7. Avoid text overflows */
+    p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+    }
+    /* 8. Improve line wrapping */
+    p {
+    text-wrap: pretty;
+    }
+    h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance;
+    }
+    /*
+    9. Create a root stacking context
+    */
+    #root, #__next {
+    isolation: isolate;
+    }
+
+body {
     background-color: #f8f9fa; 
 }
 
-header {
+#header {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: 30px;
     background-color: #333;
     color: #fff;
     padding: 1rem 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0;
-    z-index: 1000;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000; 
 }
 
 nav {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
+    position: fixed;
+    top: 70%; 
+    right: 0;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 nav a {
-    text-decoration: none;
-    color: #fff;
-    font-weight: 500;
-    position: relative;
-    transition: all 0.3s ease;
-}
-
-nav a::after {
-    content: '';
     display: block;
-    height: 2px;
-    width: 0;
-    background: #ff6f61;
-    transition: width 0.3s ease;
-    position: absolute;
-    left: 0;
-    bottom: -2px;
+    margin: 5px 0;
+    text-decoration: none;
+    color: #333;
+    padding: 5px 10px;
+    transition: all 0.3s ease;
+    z-index: 1000; 
+
 }
 
 nav a:hover {
     color: #ff6f61;
 }
 
-nav a:hover::after {
-    width: 100%;
-}
 
 /* Section Styles */
 section {
     padding: 40px 5vw; 
     max-width: 1200px; 
     margin: 0 auto; 
+    scroll-margin-block: 50px;
+
 }
 
 
 
 #content {
     width: 100%; 
-}
-
-section.highlight {
-    background: #ff6f61;
-    color: #fff;
-    text-align: center;
-    box-shadow: none;
-}
-
-section.highlight:hover {
-    transform: none;
-    box-shadow: none;
+    display: flex;
+    flex-direction: column;
 }
 
 h1, h2, h3 {
@@ -108,30 +135,36 @@ blockquote {
 
 /* Gallery Styles */
 #gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-#gallery img {
-    width: 100%; 
-    height: 200px; 
+#gallery > #imageContainer {
+    display: flex;
+    gap: 20px;
+}
+
+#imageContainer > img {
+    display: block;
+    width: 300px; 
+    height: 300px; 
     object-fit: cover; 
     border-radius: 8px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-#gallery img:hover {
+#imageContainer img:hover {
     transform: scale(1.05); 
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 #about {
-    position: relative;
-    width: 100vw; 
+    /* position: relative; */
+    /* width: 100vw;  */
     margin: 0; 
-    padding-top: 200px; 
+    padding-top: 250px; 
     box-sizing: border-box;
 }
 
@@ -140,14 +173,14 @@ blockquote {
     top: 0;
     left: 0; 
     width: 100vw; 
-    height: 300px;
+    height: 400px;
     object-fit: cover;
 }
 
 #about h1 {
     position: absolute;
-    top: 32%;
-    left: 27%;
+    top: 23%;
+    left: 20%;
     transform: translate(-50%, -50%);
     color: white;
     font-size: 2.5rem;
@@ -185,8 +218,8 @@ button {
     background: #ff6f61;
     color: #fff;
     border: none;
-    padding: 0.8rem 1.5rem;
-    border-radius: 4px;
+    padding: 0.4rem 1.5rem;
+    border-radius: 2px;
     cursor: pointer;
     font-size: 1rem;
     transition: background 0.3s ease, transform 0.2s ease;
@@ -197,18 +230,8 @@ button:hover {
     transform: translateY(-2px);
 }
 
-/* Media Queries */
-@media (max-width: 768px) {
-    nav {
-        flex-wrap: wrap;
-        gap: 1rem;
-    }
-
-    section {
-        padding: 2rem 1rem;
-    }
-
-    h2 {
-        font-size: 1.8rem;
-    }
+#contact{   
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }

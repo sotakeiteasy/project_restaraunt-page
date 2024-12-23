@@ -15,7 +15,7 @@ function loadPage() {
     // Header Section
     const header = document.createElement('header');
     const nav = document.createElement('nav');
-    const navItems = ['About', 'Menu', 'Our Story', 'Chefs', 'Fun Facts', 'Reviews', 'Gallery', 'Contact'];
+    const navItems = ['About', 'Today\'s Menu', 'Our Story', 'Gallery', 'Chefs', 'Reviews'];
     navItems.forEach(item => {
         const navLink = document.createElement('a');
         navLink.href = `#${item.toLowerCase().replace(/\s+/g, '-')}`;
@@ -41,7 +41,7 @@ function loadPage() {
 
     // Menu Section
     const menuSection = document.createElement('section');
-    menuSection.id = 'menu';
+    menuSection.id = 'today\'s-menu';
     const menuHeader = document.createElement('h2');
     menuHeader.textContent = 'Menu of the Day';
     const menuItems = [
@@ -82,6 +82,8 @@ function loadPage() {
     chefsSection.id = 'chefs';
     const chefsHeader = document.createElement('h2');
     chefsHeader.textContent = 'Meet Our Chefs';
+    chefsSection.appendChild(chefsHeader)
+
     const chefsText = document.createElement('p');
     chefsText.textContent = 'Our talented chefs craft unforgettable dishes, blending traditional techniques with modern flavors.';
     const chefProfiles = [
@@ -97,26 +99,33 @@ function loadPage() {
         profileSection.append(profileName, profileBio);
         chefsSection.appendChild(profileSection);
     });
-    chefsSection.append(chefsHeader, chefsText);
+    chefsSection.appendChild(chefsText);
 
     // Gallery Section
     const gallerySection = document.createElement('section');
     gallerySection.id = 'gallery';
     const galleryHeader = document.createElement('h2');
     galleryHeader.textContent = 'Gallery';
+    gallerySection.append(galleryHeader);
+
+    const imageContainer = document.createElement('div');
+    imageContainer.id = 'imageContainer'
     const images = [dish1, dish2, dish3]; // Imported paths
     images.forEach(src => {
         const img = document.createElement('img');
         img.src = src;
         img.alt = 'Dish image';
-        gallerySection.appendChild(img);
+        imageContainer.appendChild(img);
     });
+    gallerySection.appendChild(imageContainer)
 
     // Reviews Section
     const reviewsSection = document.createElement('section');
     reviewsSection.id = 'reviews';
     const reviewsHeader = document.createElement('h2');
     reviewsHeader.textContent = 'Customer Reviews';
+    reviewsSection.appendChild(reviewsHeader)
+
     const reviews = [
         { name: 'John Doe', text: 'Delicious food and great service.' },
         { name: 'Jane Smith', text: 'Perfect for family gatherings!' }
@@ -127,16 +136,6 @@ function loadPage() {
         reviewsSection.appendChild(reviewItem);
     });
 
-    // Contact Section
-    const contactSection = document.createElement('section');
-    contactSection.id = 'contact';
-    const contactHeader = document.createElement('h2');
-    contactHeader.textContent = 'Contact Us';
-    const contactText = document.createElement('p');
-    contactText.textContent = 'Feel free to reach out for reservations or inquiries.';
-    const contactDetails = document.createElement('p');
-    contactDetails.innerHTML = 'Phone: (123) 456-7890<br>Email: info@gourmethaven.com';
-    contactSection.append(contactHeader, contactText, contactDetails);
 
     // Append sections to content
     content.append(
@@ -145,9 +144,7 @@ function loadPage() {
         historySection,
         gallerySection,
         chefsSection,
-        // funFactsSection,
         reviewsSection,
-        contactSection
     );
 }
 
